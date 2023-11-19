@@ -1,0 +1,153 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <img src="https://t3.ftcdn.net/jpg/06/58/52/54/240_F_658525412_Oxpogdur8xSTvFzTTKqJnhKEVBsacMXM.jpg" style="width:50px;height: 50px; margin-left:20px;display: flex;">
+
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <a
+        class="navbar-brand mt-2 mt-lg-0"
+        routerLink="../homepage"
+        href="loginsuccess.component.html"
+      >
+        <h2 class="text-start" style="color: rgb(155, 118, 50)">
+          <i style="margin-left: 5px;">MovieWorld</i>
+        </h2>
+      </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="../movies"
+            href="movies.component.html"
+            ></a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="../bookshow"
+            href="show-book.component.html"
+            ><b>Book</b></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"></a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex align-items-center" style="color: rgb(195, 195, 195)">
+      <form class="d-flex">
+        <input
+          class="form-control me-2" 
+          (ngModelChange)="SearchMovie(key.value)"
+          #key="ngModel"
+          ngModel
+          type="search"
+          name="key"
+          placeholder="Search...."
+        />
+      </form>
+        
+      <div  class="dropdown" style="margin-top: 20px;color: black;">
+          <a
+            class="dropdown-toggle"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+              class="rounded-circle"
+              height="25"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+            </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="color: aquamarine;">
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a #id class="dropdown-item" href="login.component.html" routerLink="../login" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+          
+        </div>
+        <div *ngIf="currentUser" style="margin-right:5px;">{{currentUser.uname}}</div>
+
+
+    </div>
+
+
+          
+  </div>
+</nav>
+
+<div
+  style="
+    background-color: rgba(88, 69, 69, 0.573);
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 30px;
+  "
+>
+  <ng-container *ngFor="let movie of movies">
+    
+    <div class="card" style="width: 220px; height: 300px">
+      <img
+        class="img-fluid"
+        id="img-hover"
+        style="width: 220px; height: 180px"
+        src="{{ movie.image }}"
+        class="card-img-top"
+        alt="Movie Img"
+      />
+      <div class="card-body" style="color: rgb(255, 255, 255)">
+        <h5 class="card-title" style="color: rgb(103, 22, 22);text-align: center;">
+          {{ movie.title }}
+        </h5>
+        <div class="card-detail" style="display: flex; flex-direction: column">
+          <div style="font-weight: bold; text-align: center; font-size: large">
+            <b>{{ movie.description }}</b>
+          </div>
+          <p>
+            Duration:
+            <span style="font-weight: bolder">{{ movie.duration }}</span>
+          </p>
+          <p>
+            IMDB: <span style="font-weight: bolder">{{ movie.rating }}</span>
+          </p>
+          <p>Genre: {{ movie.type }}</p>
+        </div>
+
+        <a href="{{ movie.trailer }}" target="_blank" class="btn btn-primary"
+          >Trailer</a>
+
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 55px;"href="show-book.component.html" routerLink="../bookshow">
+          Book
+        </button>
+
+      </div>
+    </div>
+  </ng-container>
+  <div style="font-size: xx-large" id="no-movie-display" hidden>
+    No Movies Found
+  </div>
+</div>

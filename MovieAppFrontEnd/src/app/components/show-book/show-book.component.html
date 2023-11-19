@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <h2 style="color: chocolate;">Booking Movie Tickets</h2>
+        <form class="d-flex">
+            <input
+            class="form-control me-2" 
+            (ngModelChange)="SearchTheatreBycity(key.value)"
+            #key="ngModel"
+            ngModel
+            type="search"
+            name="key"
+            placeholder="Search...."
+            />
+        </form>
+        <a
+        class="navbar-brand mt-2 mt-lg-0"
+        routerLink="../homepage"
+        href="loginsuccess.component.html">
+            <h4 class="text-end" style="color: chocolate;margin-left: 600px;" >Return to Homepage</h4>
+        </a>
+    `   <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+<div style="background-color: rgba(88, 69, 69, 0.573); width: 100vw; height:100vh">
+    <div
+    style="
+    background-color: rgba(88, 69, 69, 0.573);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;">
+        <ng-container *ngFor="let th of theatres">
+            <div class="card" style="width: 180px; height: 350px">
+                <img
+                    class="img-fluid"
+                    id="img-hover"
+                    style="width: 180px; height: 240px"
+                    src="{{ th.theatreImage}}"
+                    class="card-img-top"
+                    alt="Theatre Img"
+                />
+                <div class="card-detail" style="display: flex; flex-direction: column;text-align: center;">
+                    <h5>{{th.theatreName}}</h5>
+                    <h6 style="color: brown;">{{th.theatreCity}}</h6>
+                </div>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 60px;font-size: 20px;width: 78%;margin-left: 20px; border-radius: 50%;">
+                    Book Tickets
+                </button>
+
+    <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style=>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Select your Slot</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" >
+                          <form #saveForm="ngForm" (ngSubmit)="saveDetails(saveForm.value)">
+                            <label for="lang"><b>Choose Screen Type</b></label><br>
+                            <select name="screentype" id="screentype" ngModel>
+                                <ng-container *ngFor="let scr of screen">
+                                    <option [value]="scr.screenName" selected>{{scr.screenName}}</option>
+                                </ng-container>
+                            </select><br><br>
+                            <label for="lang" #data1><b>Select no of seats</b></label><br>
+                            <select name="Noofseats" id="Noofseats" ngModel>
+                                <ng-container *ngFor="let scr1 of screen">
+                                    <option [value]="scr1.totalNoOfSeats" selected>{{scr1.totalNoOfSeats}}</option>
+                                </ng-container>
+                            </select><br><br>
+                            <label for="lang"><b>Choose your Preference Seat-Type</b></label><br>
+                            <select name="SeatType" id="SeatType" ngModel>
+                                <ng-container *ngFor="let scr2 of screen">
+                                    <option [value]="scr2.seatType" selected>{{scr2.seatType}}</option>
+                                </ng-container>
+                            </select><br><br>
+                            <label for="lang"><b>Select Movie</b></label><br>
+                            <select name="movie" id="movie" ngModel>
+                                <ng-container *ngFor="let dmovie of duplmovies">
+                                    <option value="{{dmovie.title}}" selected>{{dmovie.title}}</option>
+                                </ng-container>
+                            </select><br><br>
+                            <button type="submit" class="btn btn-primary" href="display.component.html" (click)="ShowToastr()">Pay to Confirm</button>
+                          </form>  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            
+                        </div>
+                      </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

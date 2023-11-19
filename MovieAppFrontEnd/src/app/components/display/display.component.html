@@ -1,0 +1,31 @@
+<div style="background-color: aquamarine; width: 100vw; height: 100vh">
+  <h2 style="margin-left: 600px">Booking Details of the Customer:-</h2>
+  <br />
+
+  <table style="align-items: center">
+    <tr>
+      <th>Customer</th>
+      <td>{{ CurrentUser?.uname }}</td>
+    </tr>
+    <tr>
+      <th>Movie Name</th>
+      <td>{{ currentDetails?.movie }}</td>
+    </tr>
+    <tr>
+      <th>Screen Type</th>
+      <td>{{ currentDetails?.screentype }}</td>
+    </tr>
+    <tr>
+      <th>Total Seats</th>
+      <td>{{ currentDetails?.Noofseats }}</td>
+    </tr>
+    <tr>
+      <th>Seat Type</th>
+      <td>{{ currentDetails?.SeatType }}</td>
+    </tr>
+    <tr *ngIf="currentDetails">
+      <th>Price</th>
+      <td>{{ currentDetails.Noofseats * 150 }}/-</td>
+    </tr>
+  </table>
+</div>
